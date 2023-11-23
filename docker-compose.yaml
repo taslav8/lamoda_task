@@ -3,8 +3,8 @@ services:
   postgres:
     image: postgres:14-alpine
     environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=secret
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
       - POSTGRES_DB=lamoda_db
   api:
     build:
@@ -13,7 +13,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DB_SOURCE=postgresql://root:secret@postgres:5432/lamoda_db?sslmode=disable
+      - DB_SOURCE=postgresql://postgres:root@localhost:5432/lamoda_db?sslmode=disable
     depends_on:
       - postgres
     entrypoint:

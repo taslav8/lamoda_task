@@ -1,4 +1,3 @@
--- КОНФИГУРАЦИЯ -- 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = ON;
@@ -8,8 +7,7 @@ SET search_path = public, extensions;
 SET default_tablespace = '';
 SET default_with_oids = FALSE;
 
--- ТАБЛИЦЫ --
-CREATE TABLE warehouse (
+CREATE TABLE stores (
   id SERIAL PRIMARY KEY, 
   name TEXT, 
   is_available BOOLEAN
@@ -21,10 +19,9 @@ CREATE TABLE products (
   size TEXT, 
   code TEXT UNIQUE, 
   quantity INTEGER NOT NULL, 
-  warehouse_id INTEGER REFERENCES warehouse(id)
+  store_id INTEGER REFERENCES stores(id)
 );
 
--- СОЗДАНИЕ ИНДЕКСОВ --
 CREATE INDEX idx_products_code ON products (code);
 CREATE INDEX idx_products_quantity ON products (quantity);
-CREATE INDEX idx_warehouse_name ON warehouse (name);
+CREATE INDEX idx_stores_name ON stores (name);
